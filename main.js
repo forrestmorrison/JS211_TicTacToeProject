@@ -10,7 +10,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// creates and empty "board" for the user to see where marks can be placed.
+// creates an empty "board" for the user to see where marks can be placed.
 // using let because the variable is expected to change with more 'X's and 'O's to add
 let board = [
   [' ', ' ', ' '],
@@ -34,60 +34,65 @@ const printBoard = () => {
 
 // declare function that checks for horizontal win
 const horizontalWin = () => {
-  if((board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X") 
-  || (board[0][0] == "O" && board[0][1] == "O" && board[0][2] == "O")
-  || (board[1][0] == "X" && board[1][1] == "X" && board[1][2] == "X") 
-  || (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O")
-  || (board[2][0] == "X" && board[2][1] == "X" && board[2][2] == "X") 
-  || (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O")) {
-    window.alert(`Player ${currentMarker} won!`);
+  if((board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X") || (board[0][0] == "O" && board[0][1] == "O" && board[0][2] == "O")) {
+    return true;
+  } else if ((board[1][0] == "X" && board[1][1] == "X" && board[1][2] == "X") || (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O")) {
+    return true;
+  } else if ((board[2][0] == "X" && board[2][1] == "X" && board[2][2] == "X") || (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O")) {
+    return true;
+  } else {
+    return false;
   }
 }
 
 const verticalWin = () => {
-  if((board[0][0] == "X" && board[1][0] == "X" && board[2][0] == "X") 
-  || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")
-  || (board[0][1] == "X" && board[1][1] == "X" && board[2][1] == "X") 
-  || (board[0][1] == "O" && board[1][1] == "O" && board[2][1] == "O")
-  || (board[0][2] == "X" && board[1][2] == "X" && board[2][2] == "X") 
-  || (board[0][2] == "O" && board[1][2] == "O" && board[2][2] == "O")) {
-    window.alert(`Player ${currentMarker} won!`);
+  if((board[0][0] == "X" && board[1][0] == "X" && board[2][0] == "X") || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")) {
+    return true;
+  } else if ((board[0][1] == "X" && board[1][1] == "X" && board[2][1] == "X") || (board[0][1] == "O" && board[1][1] == "O" && board[2][1] == "O")) {
+    return true;
+  } else if ((board[0][2] == "X" && board[1][2] == "X" && board[2][2] == "X") || (board[0][2] == "O" && board[1][2] == "O" && board[2][2] == "O")) {
+    return true;
+  } else {
+    return false;
   }
 }
 
 const diagonalWin = () => {
-  if((board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X") 
-  || (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O")
-  || (board[2][0] == "X" && board[1][1] == "X" && board[0][2] == "X") 
-  || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O")) {
-    window.alert(`Player ${currentMarker} won!`);
-  } 
+  if((board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X") || (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O")) {
+    return true; 
+  } else if ((board[2][0] == "X" && board[1][1] == "X" && board[0][2] == "X") || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O")) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 const checkForWin = () => {
-  // call horizontalWin function. if there is a win, log message stating which player won
-  
-  // if not a win, change playerTurn variable from "X" to "O" or "O" to "X"
-  
-  // call verticalWin function. if there is a win, log message stating which player won
+  if(horizontalWin() || verticalWin() || diagonalWin()) {
+    console.log(`Player ${playerTurn} won!`);
+    return true;
+  } else {
+    changePlayer();
+  }
 
-  // call diagonalWin function. if there is a win, log message stating which player won
+}
 
-  
-
+const changePlayer = () => {
+  if (playerTurn === "X") {
+    playerTurn = "O";
+  } else if (playerTurn === "O") {
+    playerTurn = "X";
+  }
 }
 
 const ticTacToe = (row, column) => {
-  // if row is 0 & column is 0, corresponding index on board equals playerTurn
-  // if row is 0 & column is 1, corresponding index on board equals playerTurn
-  // if row is 0 & column is 2, corresponding index on board equals playerTurn
-  // if row is 1 & column is 0, corresponding index on board equals playerTurn
-  // if row is 1 & column is 1, corresponding index on board equals playerTurn
-  // if row is 1 & column is 2, corresponding index on board equals playerTurn
-  // if row is 2 & column is 0, corresponding index on board equals playerTurn
-  // if row is 2 & column is 1, corresponding index on board equals playerTurn
-  // if row is 2 & column is 2, corresponding index on board equals playerTurn
+  // if that row & column is already occupied, repeat getPrompt
+  if (board[row][column] === ' ') {
+    board[row][column] = playerTurn;
+    checkForWin();
+  }
 }
+
 
 const getPrompt = () => {
   // call printBoard function
