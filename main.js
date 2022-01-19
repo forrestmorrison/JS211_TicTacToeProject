@@ -32,32 +32,73 @@ const printBoard = () => {
   console.log('2 ' + board[2].join(' | '));
 }
 
+// declare function that checks for horizontal win
 const horizontalWin = () => {
-  // Your code here to check for horizontal wins
+  if((board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X") 
+  || (board[0][0] == "O" && board[0][1] == "O" && board[0][2] == "O")
+  || (board[1][0] == "X" && board[1][1] == "X" && board[1][2] == "X") 
+  || (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O")
+  || (board[2][0] == "X" && board[2][1] == "X" && board[2][2] == "X") 
+  || (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O")) {
+    window.alert(`Player ${currentMarker} won!`);
+  }
 }
 
 const verticalWin = () => {
-  // Your code here to check for vertical wins
+  if((board[0][0] == "X" && board[1][0] == "X" && board[2][0] == "X") 
+  || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")
+  || (board[0][1] == "X" && board[1][1] == "X" && board[2][1] == "X") 
+  || (board[0][1] == "O" && board[1][1] == "O" && board[2][1] == "O")
+  || (board[0][2] == "X" && board[1][2] == "X" && board[2][2] == "X") 
+  || (board[0][2] == "O" && board[1][2] == "O" && board[2][2] == "O")) {
+    window.alert(`Player ${currentMarker} won!`);
+  }
 }
 
 const diagonalWin = () => {
-  // Your code here to check for diagonal wins
+  if((board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X") 
+  || (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O")
+  || (board[2][0] == "X" && board[1][1] == "X" && board[0][2] == "X") 
+  || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O")) {
+    window.alert(`Player ${currentMarker} won!`);
+  } 
 }
 
 const checkForWin = () => {
-  // Your code here call each of the check for types of wins
+  // call horizontalWin function. if there is a win, log message stating which player won
+  
+  // if not a win, change playerTurn variable from "X" to "O" or "O" to "X"
+  
+  // call verticalWin function. if there is a win, log message stating which player won
+
+  // call diagonalWin function. if there is a win, log message stating which player won
+
+  
+
 }
 
 const ticTacToe = (row, column) => {
-  // Your code here to place a marker on the board
-  // then check for a win
+  // if row is 0 & column is 0, corresponding index on board equals playerTurn
+  // if row is 0 & column is 1, corresponding index on board equals playerTurn
+  // if row is 0 & column is 2, corresponding index on board equals playerTurn
+  // if row is 1 & column is 0, corresponding index on board equals playerTurn
+  // if row is 1 & column is 1, corresponding index on board equals playerTurn
+  // if row is 1 & column is 2, corresponding index on board equals playerTurn
+  // if row is 2 & column is 0, corresponding index on board equals playerTurn
+  // if row is 2 & column is 1, corresponding index on board equals playerTurn
+  // if row is 2 & column is 2, corresponding index on board equals playerTurn
 }
 
 const getPrompt = () => {
+  // call printBoard function
   printBoard();
+  // log message displaying which players turn it is
   console.log("It's Player " + playerTurn + "'s turn.");
+  // log message asking for "row" input
   rl.question('row: ', (row) => {
+    // log message asking for "column" input
     rl.question('column: ', (column) => {
+      // call ticTacToe function
       ticTacToe(row, column);
       getPrompt();
     });
